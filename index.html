@@ -1,886 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glenn Mark Naelgas — Collection Specialist</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --navy: #0e1c2f;
-    --navy-mid: #162540;
-    --navy-light: #1f3356;
-    --gold: #c9a84c;
-    --gold-light: #e2c97e;
-    --cream: #f5f0e8;
-    --cream-dark: #ede7d9;
-    --text-main: #1a1a2e;
-    --text-muted: #6b7280;
-    --white: #ffffff;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text-main);
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.2rem 4rem;
-    background: rgba(14, 28, 47, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
-  }
-
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    color: var(--gold);
-    letter-spacing: 0.04em;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    color: rgba(245, 240, 232, 0.7);
-    text-decoration: none;
-    font-size: 0.82rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--gold); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background: var(--navy);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: -100px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(201, 168, 76, 0.05) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-text {
-    padding: 8rem 4rem 6rem 6rem;
-    animation: fadeUp 0.9s ease both;
-  }
-
-  .hero-eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 32px; height: 1px;
-    background: var(--gold);
-  }
-
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    color: var(--cream);
-    line-height: 1.1;
-    margin-bottom: 1rem;
-  }
-
-  h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .hero-tagline {
-    font-size: 1rem;
-    color: rgba(245, 240, 232, 0.55);
-    margin-bottom: 2.5rem;
-    line-height: 1.7;
-    max-width: 420px;
-    font-weight: 300;
-  }
-
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    background: var(--gold);
-    color: var(--navy);
-    padding: 0.85rem 2rem;
-    border-radius: 2px;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-    border: none; cursor: pointer;
-  }
-
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-
-  .btn-outline {
-    border: 1px solid rgba(201, 168, 76, 0.4);
-    color: var(--gold);
-    padding: 0.85rem 2rem;
-    border-radius: 2px;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: border-color 0.2s, background 0.2s;
-  }
-
-  .btn-outline:hover { border-color: var(--gold); background: rgba(201, 168, 76, 0.07); }
-
-  .hero-right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6rem 6rem 6rem 2rem;
-    animation: fadeUp 0.9s 0.2s ease both;
-  }
-
-  .hero-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(201, 168, 76, 0.15);
-    border-radius: 4px;
-    padding: 2.5rem;
-    width: 100%;
-    max-width: 380px;
-  }
-
-  .stat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .stat-item { text-align: center; }
-
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    color: var(--gold);
-    display: block;
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 0.72rem;
-    color: rgba(245,240,232,0.5);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 6px;
-    display: block;
-  }
-
-  .stat-divider {
-    width: 1px;
-    background: rgba(201,168,76,0.15);
-    align-self: stretch;
-  }
-
-  .availability-badge {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(201,168,76,0.08);
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 2px;
-    padding: 0.9rem 1.2rem;
-    margin-top: 1.5rem;
-  }
-
-  .green-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #4ade80;
-    animation: pulse 2s infinite;
-    flex-shrink: 0;
-  }
-
-  .availability-text {
-    font-size: 0.8rem;
-    color: rgba(245,240,232,0.7);
-  }
-
-  .contact-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(201,168,76,0.1);
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.8rem;
-    color: rgba(245,240,232,0.55);
-  }
-
-  .contact-icon {
-    width: 16px;
-    color: var(--gold);
-    font-size: 0.85rem;
-    flex-shrink: 0;
-  }
-
-  /* SECTIONS */
-  section { padding: 6rem 6rem; }
-
-  .section-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .section-label::after {
-    content: '';
-    display: block;
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, rgba(201,168,76,0.3), transparent);
-    max-width: 120px;
-  }
-
-  h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    color: var(--navy);
-    margin-bottom: 3rem;
-    line-height: 1.2;
-  }
-
-  /* ABOUT */
-  #about {
-    background: var(--white);
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .about-text p {
-    font-size: 1rem;
-    line-height: 1.85;
-    color: #4b5563;
-    margin-bottom: 1.25rem;
-    font-weight: 300;
-  }
-
-  .about-highlights {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .highlight-item {
-    border-left: 2px solid var(--gold);
-    padding: 1rem 1.25rem;
-    background: var(--cream);
-  }
-
-  .highlight-title {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--gold);
-    font-weight: 500;
-    margin-bottom: 4px;
-  }
-
-  .highlight-body {
-    font-size: 0.9rem;
-    color: #374151;
-    line-height: 1.6;
-  }
-
-  /* EXPERIENCE */
-  #experience { background: var(--navy); }
-  #experience h2 { color: var(--cream); }
-  #experience .section-label { color: var(--gold); }
-
-  .exp-timeline {
-    position: relative;
-    padding-left: 2rem;
-  }
-
-  .exp-timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 8px; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.1));
-  }
-
-  .exp-item {
-    position: relative;
-    margin-bottom: 3rem;
-    padding-left: 2rem;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .exp-item::before {
-    content: '';
-    position: absolute;
-    left: -2.5rem;
-    top: 8px;
-    width: 9px; height: 9px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 2px solid var(--navy);
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.3);
-  }
-
-  .exp-date {
-    font-size: 0.75rem;
-    color: var(--gold);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
-
-  .exp-role {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--cream);
-    margin-bottom: 4px;
-  }
-
-  .exp-company {
-    font-size: 0.85rem;
-    color: rgba(245,240,232,0.5);
-    margin-bottom: 1rem;
-  }
-
-  .exp-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .exp-bullets li {
-    font-size: 0.9rem;
-    color: rgba(245,240,232,0.65);
-    line-height: 1.65;
-    padding-left: 1.2rem;
-    position: relative;
-    font-weight: 300;
-  }
-
-  .exp-bullets li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--gold);
-    font-size: 0.75rem;
-  }
-
-  /* SKILLS */
-  #skills { background: var(--cream-dark); }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .skill-card {
-    background: var(--white);
-    border: 1px solid rgba(0,0,0,0.06);
-    padding: 1.75rem;
-    border-radius: 2px;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-
-  .skill-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-3px);
-  }
-
-  .skill-card-icon {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .skill-card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: var(--navy);
-    margin-bottom: 0.75rem;
-  }
-
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .skill-tag {
-    font-size: 0.72rem;
-    background: var(--cream);
-    color: #4b5563;
-    padding: 3px 10px;
-    border-radius: 999px;
-    border: 1px solid rgba(0,0,0,0.08);
-  }
-
-  /* EDUCATION */
-  #education { background: var(--white); }
-
-  .edu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  .edu-card {
-    border: 1px solid rgba(0,0,0,0.08);
-    padding: 1.75rem;
-    border-radius: 2px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .edu-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--gold);
-  }
-
-  .edu-degree {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    color: var(--navy);
-    margin-bottom: 4px;
-  }
-
-  .edu-school {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    line-height: 1.5;
-  }
-
-  .edu-year {
-    font-size: 0.75rem;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 500;
-  }
-
-  /* CONTACT */
-  #contact {
-    background: var(--navy);
-    text-align: center;
-  }
-
-  #contact h2 { color: var(--cream); }
-  #contact .section-label { justify-content: center; }
-  #contact .section-label::after { display: none; }
-
-  .contact-tagline {
-    font-size: 1rem;
-    color: rgba(245,240,232,0.5);
-    margin-bottom: 3rem;
-    font-weight: 300;
-  }
-
-  .contact-cards {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-  }
-
-  .contact-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(201,168,76,0.15);
-    padding: 1.5rem 2rem;
-    border-radius: 2px;
-    min-width: 220px;
-    transition: border-color 0.2s;
-  }
-
-  .contact-card:hover { border-color: rgba(201,168,76,0.4); }
-
-  .contact-card-icon {
-    font-size: 1.2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .contact-card-label {
-    font-size: 0.7rem;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 4px;
-  }
-
-  .contact-card-value {
-    font-size: 0.9rem;
-    color: rgba(245,240,232,0.7);
-  }
-
-  footer {
-    background: rgba(0,0,0,0.3);
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.75rem;
-    color: rgba(245,240,232,0.25);
-    letter-spacing: 0.05em;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.3); }
-  }
-
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-text { padding: 8rem 1.5rem 2rem; }
-    .hero-right { padding: 2rem 1.5rem 4rem; }
-    section { padding: 4rem 1.5rem; }
-    .about-grid, .skills-grid, .edu-grid { grid-template-columns: 1fr; }
-    .stat-grid { grid-template-columns: 1fr 1fr; }
-  }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glenn Mark Naelgas | Collections, AR & Billing Support</title>
+<meta name="description" content="Glenn Mark Naelgas: remote Collections, Accounts Receivable and Billing Support specialist with nearly 2 years of experience on Canadian and U.S. accounts.">
+<meta property="og:title" content="Glenn Mark Naelgas | Collections, AR & Billing Support">
+<meta property="og:description" content="Remote Collections, Accounts Receivable and Billing Support specialist. SedonaOffice, FACS, FDCPA compliance.">
+<meta property="og:image" content="assets/glenn-naelgas.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2316213A'/><text x='50%' y='56%' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='700' font-size='28' fill='white'>GN</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">Glenn Mark Naelgas</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+<header class="topbar">
+  <a class="mark" href="#top" aria-label="Back to top">GN</a>
+  <nav aria-label="Sections">
+    <a href="#roles">Roles</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </nav>
+</header>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-text">
-    <div class="hero-eyebrow">Collection Specialist</div>
-    <h1>Glenn Mark<br><em>Naelgas</em></h1>
-    <p class="hero-tagline">Debt recovery and accounts receivable professional helping businesses recover outstanding balances — across borders, fully remote.</p>
-    <div class="hero-ctas">
-      <a href="#contact" class="btn-primary">Get in touch</a>
-      <a href="#experience" class="btn-outline">View experience</a>
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="status"><span class="dot" aria-hidden="true"></span>Open to remote roles, Canada and U.S. accounts</p>
+      <h1>Glenn Mark<br>Naelgas</h1>
+      <p class="lede">I recover overdue balances, keep receivables accurate, and answer billing questions clearly, by phone and by inbox.</p>
+      <dl class="facts">
+        <div><dt>Remote experience</dt><dd>Nearly 2 years</dd></div>
+        <div><dt>Billing emails handled</dt><dd>80+ a day</dd></div>
+        <div><dt>Systems</dt><dd>SedonaOffice, FACS, CRM</dd></div>
+      </dl>
+      <div class="hero-actions">
+        <a class="btn primary" href="mailto:naelgas.glennmark@gmail.com">Email me</a>
+        <a class="btn" href="#roles">Choose a résumé</a>
+      </div>
     </div>
-  </div>
+    <figure class="portrait">
+      <img src="assets/glenn-naelgas.jpg" alt="Portrait of Glenn Mark Naelgas in a dark suit and white shirt" width="900" height="1125">
+      <figcaption>Apalit, Pampanga, Philippines<br>Working remotely</figcaption>
+    </figure>
+  </section>
 
-  <div class="hero-right">
-    <div class="hero-card">
-      <div class="stat-grid">
-        <div class="stat-item">
-          <span class="stat-num">1+</span>
-          <span class="stat-label">Years experience</span>
+  <section id="roles" class="roles" aria-labelledby="roles-title">
+    <div class="section-head">
+      <h2 id="roles-title">What are you hiring for?</h2>
+      <p>Pick the role and I'll show you the version of my experience that fits it.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Role focus">
+      <button role="tab" id="tab-collections" aria-controls="role-panel" aria-selected="true" data-role="collections">Collections</button>
+      <button role="tab" id="tab-ar" aria-controls="role-panel" aria-selected="false" tabindex="-1" data-role="ar">Accounts receivable</button>
+      <button role="tab" id="tab-billing" aria-controls="role-panel" aria-selected="false" tabindex="-1" data-role="billing">Billing support</button>
+      <button role="tab" id="tab-cs" aria-controls="role-panel" aria-selected="false" tabindex="-1" data-role="cs">Customer &amp; email support</button>
+    </div>
+
+    <div id="role-panel" class="role-panel" role="tabpanel" aria-labelledby="tab-collections" tabindex="0">
+      <div class="role-main">
+        <h3 id="role-title">Collections Specialist</h3>
+        <p id="role-summary">Nearly 2 years of remote experience recovering delinquent balances on Canadian and U.S.-regulated accounts through outbound and inbound calls. Skilled in negotiating payment plans and settlements, with Fair Debt Collection Practices Act (FDCPA) compliant documentation. Consistently met daily and monthly recovery targets.</p>
+        <a id="role-download" class="btn primary" href="resumes/Naelgas_Glenn_Mark_Collections_Specialist.pdf" download>Download Collections résumé (PDF)</a>
+      </div>
+      <div class="role-side">
+        <h4>Most relevant skills</h4>
+        <ul id="role-skills" class="chips"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="experience" aria-labelledby="exp-title">
+    <div class="section-head">
+      <h2 id="exp-title">Experience</h2>
+      <p>Both roles fully remote.</p>
+    </div>
+
+    <ol class="timeline">
+      <li class="job">
+        <div class="when">
+          <span>Jan 2026 – Oct 2026</span>
+          <span class="where">Canada, remote</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">2</span>
-          <span class="stat-label">Roles held</span>
+        <div class="what">
+          <h3>Collection Specialist &amp; Billing Support <span class="tag">Freelance</span></h3>
+          <p class="org">Virtual Hire for a.p.i. Alarm Inc.</p>
+          <ul>
+            <li>Managed delinquent accounts for a Canadian alarm and security company, following up on outstanding balances by phone and email.</li>
+            <li>Answered 80+ customer billing emails a day and ran the shared accounts receivable inbox.</li>
+            <li>Recorded payment agreements, communications and account statuses in the client's CRM.</li>
+            <li>Handled account and billing activity in SedonaOffice.</li>
+            <li>Worked independently as a freelancer, managing my own schedule and workload.</li>
+          </ul>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">B2B</span>
-          <span class="stat-label">& B2C</span>
+      </li>
+      <li class="job">
+        <div class="when">
+          <span>Nov 2024 – Jan 2026</span>
+          <span class="where">Quezon City, remote</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">100%</span>
-          <span class="stat-label">Remote-ready</span>
+        <div class="what">
+          <h3>Collection Specialist</h3>
+          <p class="org">Transworld System Customer Service Philippines LLC</p>
+          <ul>
+            <li>Handled high-volume inbound and outbound collection calls, consistently meeting daily and monthly recovery targets.</li>
+            <li>Negotiated payment plans and settlements within company policy and consumer collection laws.</li>
+            <li>Assessed and prioritized delinquent accounts with team leads to plan collection strategy.</li>
+            <li>Applied skip tracing techniques to locate unresponsive debtors.</li>
+            <li>Documented all activity in FACS and followed FDCPA compliance and escalation protocols.</li>
+          </ul>
         </div>
-      </div>
+      </li>
+    </ol>
+  </section>
 
-      <div class="availability-badge">
-        <div class="green-dot"></div>
-        <span class="availability-text">Available for full-time or freelance remote roles</span>
+  <section id="skills" class="skills" aria-labelledby="skills-title">
+    <div class="section-head">
+      <h2 id="skills-title">Skills and tools</h2>
+    </div>
+    <div class="skill-groups">
+      <div>
+        <h3>Collections &amp; AR</h3>
+        <ul>
+          <li>Accounts receivable management</li>
+          <li>Payment plans and settlements</li>
+          <li>Skip tracing</li>
+          <li>FDCPA compliance</li>
+          <li>Billing inquiry resolution</li>
+        </ul>
       </div>
+      <div>
+        <h3>Communication</h3>
+        <ul>
+          <li>Written and verbal English</li>
+          <li>High-volume inbound and outbound calls</li>
+          <li>Shared inbox management</li>
+          <li>De-escalation and conflict resolution</li>
+          <li>Escalating complex cases</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Systems</h3>
+        <ul>
+          <li>SedonaOffice</li>
+          <li>FACS</li>
+          <li>CRM documentation</li>
+          <li>Microsoft Word, Excel, Outlook</li>
+        </ul>
+      </div>
+    </div>
 
-      <div class="contact-row">
-        <div class="contact-item">
-          <span class="contact-icon">📍</span>
-          Malabon City, Metro Manila, PH
+    <aside class="nursing">
+      <h3>Why the nursing background matters</h3>
+      <p>Two years of nursing school trained me to stay calm with people under stress, read a situation before reacting, and document everything precisely. Those habits carry straight into a hard collections call or a frustrated billing email.</p>
+    </aside>
+  </section>
+
+  <section class="education" aria-labelledby="edu-title">
+    <div class="section-head">
+      <h2 id="edu-title">Education</h2>
+    </div>
+    <ul class="edu-list">
+      <li>
+        <span class="edu-years">2022 – 2024</span>
+        <div>
+          <h3>Bachelor of Science in Nursing, completed 2 years</h3>
+          <p>Lady of Lourdes Hospital and Colleges of Caybiga Inc.</p>
         </div>
-        <div class="contact-item">
-          <span class="contact-icon">✉️</span>
-          naelgas.glennmark@gmail.com
+      </li>
+      <li>
+        <span class="edu-years">2019 – 2021</span>
+        <div>
+          <h3>Senior High School, STEM strand</h3>
+          <p>Manuel A. Roxas High School</p>
         </div>
-        <div class="contact-item">
-          <span class="contact-icon">📞</span>
-          (+63) 993 609 4103
-        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">Let's talk about your receivables.</h2>
+    <p>Available for remote collections, AR and billing support roles.</p>
+    <div class="contact-links">
+      <a href="mailto:naelgas.glennmark@gmail.com">
+        <span class="c-label">Email</span>
+        <span class="c-value">naelgas.glennmark@gmail.com</span>
+      </a>
+      <a href="tel:+639936094103">
+        <span class="c-label">Phone</span>
+        <span class="c-value">+63 993 609 4103</span>
+      </a>
+      <div>
+        <span class="c-label">Location</span>
+        <span class="c-value">Apalit, Pampanga 2016, Philippines</span>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">About me</div>
-  <h2>Results-driven. Compliant.<br>Client-focused.</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm a Collection Specialist with over a year of hands-on experience in debt recovery and accounts receivable management — working with both local Philippine companies and international clients remotely.</p>
-      <p>I specialize in high-volume outbound and inbound collection calls, payment negotiation, skip tracing, and FDCPA-compliant collections across B2B and B2C portfolios. I'm currently managing delinquent accounts for a Canadian alarm and security firm, fully remote and independently.</p>
-      <p>My background in Nursing has sharpened skills that translate directly into effective collections: calm under pressure, empathetic communication, and sharp attention to detail.</p>
-    </div>
-    <div class="about-highlights">
-      <div class="highlight-item">
-        <div class="highlight-title">Remote Experience</div>
-        <div class="highlight-body">Currently working for a Canadian client (a.p.i. Alarm Inc.) fully remotely — comfortable operating independently across time zones.</div>
-      </div>
-      <div class="highlight-item">
-        <div class="highlight-title">Compliance</div>
-        <div class="highlight-body">Trained in FDCPA guidelines and internal escalation protocols; all collections conducted within legal and ethical boundaries.</div>
-      </div>
-      <div class="highlight-item">
-        <div class="highlight-title">Healthcare Background</div>
-        <div class="highlight-body">Former nursing student — brings patient-centered communication, analytical thinking, and composure under pressure to every client interaction.</div>
-      </div>
-      <div class="highlight-item">
-        <div class="highlight-title">Track Record</div>
-        <div class="highlight-body">Consistently met and exceeded daily and monthly recovery targets at Transworld System Inc. over a 14-month tenure.</div>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-label">Work experience</div>
-  <h2>Professional history</h2>
-  <div class="exp-timeline">
-
-    <div class="exp-item">
-      <div class="exp-date">January 2026 — Present</div>
-      <div class="exp-role">Collection Specialist (Freelance)</div>
-      <div class="exp-company">Virtual Hire · a.p.i. Alarm Inc. — Canada (Remote)</div>
-      <ul class="exp-bullets">
-        <li>Manage delinquent accounts for a Canadian alarm and security company, conducting outbound and inbound collection calls and following up on outstanding balances.</li>
-        <li>Negotiate and establish payment arrangements with clients to minimize write-offs and improve recovery rates.</li>
-        <li>Maintain accurate records of all communications, payment agreements, and account statuses in the client's CRM system.</li>
-        <li>Coordinate with billing and accounts receivable teams to resolve disputes and ensure timely account resolution.</li>
-        <li>Operate independently in a remote freelance capacity, demonstrating strong time management and self-direction.</li>
-      </ul>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-date">November 2024 — January 2026</div>
-      <div class="exp-role">Collection Specialist I</div>
-      <div class="exp-company">Transworld System Customer Service Philippines LLC — Quezon City, Philippines</div>
-      <ul class="exp-bullets">
-        <li>Handled high-volume outbound and inbound collection calls for assigned accounts, consistently achieving daily and monthly recovery targets.</li>
-        <li>Assessed delinquent accounts and applied skip tracing techniques to locate unresponsive debtors.</li>
-        <li>Negotiated payment plans and settlements in compliance with company policies and applicable consumer collection laws.</li>
-        <li>Documented all collection activity, account updates, and debtor communications accurately in the database.</li>
-        <li>Collaborated with team leads to prioritize accounts and implement effective collection strategies.</li>
-        <li>Maintained compliance with FDCPA guidelines and internal escalation protocols.</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">Core competencies</div>
-  <h2>What I bring to the table</h2>
-  <div class="skills-grid">
-
-    <div class="skill-card">
-      <div class="skill-card-icon">💼</div>
-      <div class="skill-card-title">Collection & Receivables</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Debt collection (B2B & B2C)</span>
-        <span class="skill-tag">Skip tracing</span>
-        <span class="skill-tag">Payment negotiation</span>
-        <span class="skill-tag">Settlement arrangements</span>
-        <span class="skill-tag">Aging report analysis</span>
-        <span class="skill-tag">AR management</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-icon">📋</div>
-      <div class="skill-card-title">Compliance & Legal</div>
-      <div class="skill-tags">
-        <span class="skill-tag">FDCPA compliance</span>
-        <span class="skill-tag">Consumer debt regulations</span>
-        <span class="skill-tag">Escalation protocols</span>
-        <span class="skill-tag">Dispute resolution</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-icon">📞</div>
-      <div class="skill-card-title">Communication</div>
-      <div class="skill-tags">
-        <span class="skill-tag">High-volume inbound/outbound calls</span>
-        <span class="skill-tag">Conflict de-escalation</span>
-        <span class="skill-tag">Written & verbal (English)</span>
-        <span class="skill-tag">Relationship management</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-icon">🖥️</div>
-      <div class="skill-card-title">Technical & Admin</div>
-      <div class="skill-tags">
-        <span class="skill-tag">CRM software</span>
-        <span class="skill-tag">Database documentation</span>
-        <span class="skill-tag">Microsoft Excel</span>
-        <span class="skill-tag">Microsoft Outlook</span>
-        <span class="skill-tag">Microsoft Word</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-icon">🌐</div>
-      <div class="skill-card-title">Remote Work</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Independent self-direction</span>
-        <span class="skill-tag">Cross-timezone operations</span>
-        <span class="skill-tag">Freelance project management</span>
-        <span class="skill-tag">Digital communication tools</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-icon">🩺</div>
-      <div class="skill-card-title">Transferable (Nursing)</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Analytical thinking</span>
-        <span class="skill-tag">Empathetic communication</span>
-        <span class="skill-tag">Stress management</span>
-        <span class="skill-tag">Detail-oriented</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-  <div class="section-label">Education</div>
-  <h2>Academic background</h2>
-  <div class="edu-grid">
-    <div class="edu-card">
-      <div class="edu-degree">Bachelor of Science in Nursing (Undergraduate)</div>
-      <div class="edu-school">Lady of Lourdes Hospital and Colleges of Caybiga Inc.</div>
-      <div class="edu-year">2022 — 2024</div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-degree">Senior High School — STEM</div>
-      <div class="edu-school">Manuel A. Roxas High School<br>Science, Technology, Engineering & Mathematics</div>
-      <div class="edu-year">2019 — 2021</div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">Get in touch</div>
-  <h2>Let's work together</h2>
-  <p class="contact-tagline">Open to remote full-time and freelance collection roles. Based in Metro Manila, PH.</p>
-
-  <div class="contact-cards">
-    <div class="contact-card">
-      <div class="contact-card-icon">✉️</div>
-      <div class="contact-card-label">Email</div>
-      <div class="contact-card-value">naelgas.glennmark@gmail.com</div>
-    </div>
-    <div class="contact-card">
-      <div class="contact-card-icon">📞</div>
-      <div class="contact-card-label">Phone / WhatsApp</div>
-      <div class="contact-card-value">(+63) 993 609 4103</div>
-    </div>
-    <div class="contact-card">
-      <div class="contact-card-icon">📍</div>
-      <div class="contact-card-label">Location</div>
-      <div class="contact-card-value">Malabon City, Metro Manila, PH</div>
-    </div>
-  </div>
-
-  <a href="mailto:naelgas.glennmark@gmail.com" class="btn-primary">Send me an email ↗</a>
-</section>
-
-<footer>
-  © 2026 Glenn Mark Naelgas · Collection Specialist · Metro Manila, Philippines
+<footer class="footer">
+  <p>© <span id="year">2026</span> Glenn Mark Naelgas</p>
+  <a href="#top">Back to top</a>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
